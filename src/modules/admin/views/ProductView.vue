@@ -38,19 +38,17 @@
         <CustomInput
           :id="'price'"
           :name="'Price'"
-          v-model="price"
+          v-model.number="price"
           v-bind="priceAttrs"
           :error="errors.price"
-          :type="'number'"
         />
 
         <CustomInput
           :id="'stock'"
           :name="'Stock'"
-          v-model="stock"
+          v-model.number="stock"
           v-bind="stockAttrs"
           :error="errors.stock"
-          :type="'number'"
         />
       </div>
 
@@ -79,15 +77,26 @@
       <label for="images" class="form-label">Imágenes</label>
       <!-- Row with scrollable horizontal -->
       <div class="flex p-2 overflow-x-auto space-x-8 w-full h-[265px] bg-gray-200 rounded">
-        <div class="flex-shrink-0" v-for="image of images" :key="image.value">
-          <img :src="image.value" :alt="title" class="w-[250px] h-[250px]" />
+        <div v-for="image of images" :key="image.value" class="flex-shrink-0">
+          <img :src="image.value" :alt="title" class="w-[250px] h-[250px] rounded" />
+        </div>
+        <div v-for="imageFile of imageFiles" :key="imageFile.name" class="flex-shrink-0">
+          <img :src="temporalImageUrl(imageFile)" class="w-[250px] h-[250px] rounded" />
         </div>
       </div>
       <!-- Upload image -->
       <div class="col-span-2 my-2">
         <label for="image" class="form-label">Subir imagen</label>
 
-        <input multiple type="file" id="image" class="form-control" />
+        <input
+          multiple
+          type="file"
+          id="image"
+          class="form-control"
+          accept="image/*"
+          @change="onFileChange"
+        />
+        />
       </div>
 
       <div class="mb-4">
@@ -113,25 +122,15 @@
       <!-- Botón para guardar -->
       <div class="my-4 text-right">
         <button
+          :disabled="isPendingUpdate"
           type="submit"
-          class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+          class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 disabled:bg-gray-200"
         >
           Guardar
         </button>
       </div>
     </div>
   </form>
-  <div class="grid grid-cols-3 p-4 mt-2">
-    <pre class="bg-blue-200">
-      {{ JSON.stringify(values, null, 2) }}
-    </pre>
-    <pre class="bg-red-200">
-      {{ JSON.stringify(errors, null, 2) }}
-    </pre>
-    <pre class="bg-green-200">
-      {{ JSON.stringify(meta, null, 2) }}
-    </pre>
-  </div>
 </template>
 
 <style scoped>

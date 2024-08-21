@@ -152,11 +152,13 @@
         </RouterLink>
       </div>
       <div class="flex justify-center pb-4">
-        <button
+        <RouterLink
+          to="/admin/products/create"
+          href="#"
           class="p-2 font-medium text-blue-500 bg-blue-200 rounded-sm hover:text-white hover:bg-blue-700"
         >
           New product
-        </button>
+        </RouterLink>
       </div>
     </div>
     <div class="flex flex-col flex-grow">
