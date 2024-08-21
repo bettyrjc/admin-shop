@@ -4,7 +4,7 @@ import ArrowLeftIcon from '../../../icons/ArrowLeftIcon.vue';
 
 interface Props {
   page: number;
-  isFirstPage: boolean;
+  isFirstPage?: boolean;
   hasMoreData: boolean;
 }
 defineProps<Props>();

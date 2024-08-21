@@ -7,7 +7,7 @@ import FullScreenLoader from './modules/common/FullScreenLoader.vue';
 const authStore = useAuthStore();
 const router = useRouter();
 const route = useRoute();
-
+// react change watch watchEffect
 authStore.$subscribe(
   (_, state) => {
     if (state.authStatus === AuthStatus.Checking) {
